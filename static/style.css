@@ -1,0 +1,27 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background: #f4f4f4;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+pre {
+    background: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    overflow-x: auto;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+ul {
+    background: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Snort PCAP Analyzer</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Snort PCAP Analyzer</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="pcap" accept=".pcap" required>
+        <button type="submit">Upload and Analyze</button>
+    </form>
+
+    <h2>Snort Output:</h2>
+    {% if output %}
+        <pre>{{ output|tojson(indent=2) }}</pre>
+    {% else %}
+        <p>No output yet.</p>
+    {% endif %}
+
+    <h2>Server Status:</h2>
+    <ul>
+        <li>CPU Usage: {{ stats.cpu_percent }}%</li>
+        <li>Memory Usage: {{ stats.mem_percent }}%</li>
+        <li>Disk Usage: {{ stats.disk_percent }}%</li>
+        <li>Snort Status: {{ stats.snort_status }}</li>
+    </ul>
+</body>
+</html>
+

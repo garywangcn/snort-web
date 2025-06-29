@@ -41,19 +41,19 @@ def upload_file():
                 '-c', SNORT_CONF,
                 '--daq-dir', '/usr/local/daq/lib/daq/',
                 '--pcap-list', filepath,
-                '-A', 'alert_json',
                 '-q'
             ]
 
             try:
                 result = subprocess.run(cmd, capture_output=True, check=False, text=False)
-                print(result)
-                stdout = result.stdout.decode('utf-8')
-                snort_output = [json.loads(line) for line in stdout.strip().split('\n') if line.startswith('{')]
+                output = result.stdout.decode(errors='ignore')
+                snort_alerts = output.strip().split('\n')
             except subprocess.CalledProcessError as e:
-                snort_output = [{'error': e.stderr}]
+                error_msg = e.stderr.decode(errors='ignore')
+                snort_alerts = [f"Snort failed: {error_msg}"]
 
-    return render_template('index.html', output=snort_output, stats=stats)
+            print(snort_alerts)
+    return render_template('index.html', output=snort_alerts, stats=stats)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

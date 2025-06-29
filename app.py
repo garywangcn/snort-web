@@ -28,6 +28,7 @@ def get_server_stats():
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
     snort_output = []
+    snort_alerts = []
     stats = get_server_stats()
 
     if request.method == 'POST':
